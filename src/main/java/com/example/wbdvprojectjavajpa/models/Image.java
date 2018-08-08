@@ -1,5 +1,7 @@
 package com.example.wbdvprojectjavajpa.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +26,9 @@ public class Image {
 	@Lob
 	@Column(name="contents", length = 100000)
 	private byte[] contents;
+	
+	@OneToMany(mappedBy="image", orphanRemoval = true)
+	private List<Comment> comments;
 	
 	public int getId() {
 		return id;
@@ -54,5 +60,12 @@ public class Image {
 	public void setContents(byte[] contents) {
 		this.contents = contents;
 	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 }

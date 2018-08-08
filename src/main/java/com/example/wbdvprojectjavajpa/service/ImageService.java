@@ -1,9 +1,17 @@
 package com.example.wbdvprojectjavajpa.service;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Optional;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -69,11 +77,43 @@ public class ImageService {
 	
 	@PutMapping("api/image/{imageId}")
 	public Image updateImage(@PathVariable("imageId") int imageId, @RequestBody byte[] contents) {
+		
 		Optional<Image> data = imageRepo.findById(imageId);
 		if(data.isPresent()) {
 			Image image = data.get();
+			try {
+				File file = File.createTempFile(image.getName(), ".png", new File("./src/image"));
+				FileOutputStream out = new FileOutputStream(file); 
+				out.write(contents);
+				out.close();
+			}
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			image.setContents(contents);
 			return imageRepo.save(image);
+		}
+		return null;
+	}
+	
+	@GetMapping("api/image/{imageId}")
+	public byte[] getImage(@PathVariable("imageId") int imageId, HttpServletResponse response) {
+		Optional<Image> data = imageRepo.findById(imageId);
+		if(data.isPresent()) {
+			Image image = data.get();
+//			return System.getProperty("user.dir")+"/src/image/"+image.getName();
+			byte[] contents =  image.getContents();
+			response.setContentType(image.getMimeType());
+			try {
+				ServletOutputStream outputStream = response.getOutputStream();
+				outputStream.write(contents);
+				outputStream.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		return null;
 	}
