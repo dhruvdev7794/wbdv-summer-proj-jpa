@@ -17,6 +17,8 @@ public class Project {
 	@OneToMany(mappedBy="project", orphanRemoval = true)
     private List<Image> images;
 
+//	@OneToMany(mappedBy="project")
+//	private List<UserProjectAssociation> users;
 	
 	public int getId() {
 		return id;
@@ -36,6 +38,13 @@ public class Project {
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}
+//	public List<UserProjectAssociation> getUsers() {
+//		return users;
+//	}
+//	public void setUsers(List<UserProjectAssociation> users) {
+//		this.users = users;
+//	}
+	
 	
 	
 	

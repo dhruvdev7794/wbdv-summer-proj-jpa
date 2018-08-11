@@ -107,14 +107,10 @@ class UserServices {
 	//login
 	@PostMapping("/api/login")
 	public Optional<User> login(@RequestBody User user, HttpSession session) {
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
 		Optional<User> data = userRespository.findByCredentials(user.getUsername(), user.getPassword());
       if (data.isPresent()) {
-//			User user = data.get();
 			session.setAttribute("currentUser", data.get());
 			return data;
-			
 		}
 		return null;
 
