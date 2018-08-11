@@ -115,14 +115,12 @@ class UserServices {
 		return null;
 
 	}
-
 	
-
-
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
+		System.out.println(session.getAttribute("currentUser"));
 		User currentUser = (User) session.getAttribute("currentUser");
-		System.out.println(currentUser.getPassword());
+		System.out.println(currentUser);
 		return currentUser;
 	}
 

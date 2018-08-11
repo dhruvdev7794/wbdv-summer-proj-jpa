@@ -2,6 +2,7 @@ package com.example.wbdvprojectjavajpa.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +22,10 @@ public class User {
 	private String lastName;
 	private String role;
 	
-//	@OneToMany(mappedBy="user")
-//	private List<UserProjectAssociation> projects;
+	@OneToMany(mappedBy="user",
+			cascade= CascadeType.ALL,
+			orphanRemoval=true)
+	private List<UserProjectAssociation> projects;
 	
 	public int getId() {
 		return id;
@@ -60,12 +63,12 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-//	public List<UserProjectAssociation> getProjects() {
-//		return projects;
-//	}
-//	public void setProjects(List<UserProjectAssociation> projects) {
-//		this.projects = projects;
-//	}
+	public List<UserProjectAssociation> getProjects() {
+		return projects;
+	}
+	public void setProjects(List<UserProjectAssociation> projects) {
+		this.projects = projects;
+	}
 	
 
 
