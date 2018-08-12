@@ -1,5 +1,7 @@
 package com.example.wbdvprojectjavajpa.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,4 +38,10 @@ public class ProjectService {
 	public void deleteProject(@PathVariable("projectId") int id) {
 		projRepo.deleteById(id);
 	}
+	
+	@GetMapping("api/projects/{projectId}")
+	public Optional<Project> findProjectById(@PathVariable("projectId") int id) {
+		return projRepo.findById(id);
+	}
+	
 }

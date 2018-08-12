@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="user_project")
 public class UserProjectAssociation implements Serializable{
@@ -18,6 +20,7 @@ public class UserProjectAssociation implements Serializable{
 	@Id
 	@ManyToOne
 	@JoinColumn(name="user_id")
+	@JsonIgnore
 	private User user;
 	
 	@Id

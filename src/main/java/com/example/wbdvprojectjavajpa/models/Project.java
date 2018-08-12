@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Project {
 	@Id
@@ -19,9 +21,11 @@ public class Project {
 	@OneToMany(mappedBy="project",
 			cascade= CascadeType.ALL,
 			orphanRemoval = true)
+	@JsonIgnore
     private List<Image> images;
 
 	@OneToMany(mappedBy="project")
+	@JsonIgnore
 	private List<UserProjectAssociation> users;
 	
 	public int getId() {
