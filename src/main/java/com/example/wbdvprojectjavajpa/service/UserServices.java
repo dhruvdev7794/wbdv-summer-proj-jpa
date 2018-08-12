@@ -21,7 +21,7 @@ import com.example.wbdvprojectjavajpa.models.User;
 import com.example.wbdvprojectjavajpa.repository.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", maxAge = 3600)
 class UserServices {
 	
 	@Autowired
