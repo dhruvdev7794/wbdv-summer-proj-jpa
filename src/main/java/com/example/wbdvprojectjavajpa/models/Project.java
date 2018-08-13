@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +20,15 @@ public class Project {
 	private String projName;
 	
 	@OneToMany(mappedBy="project",
-			cascade= CascadeType.ALL,
+			cascade= CascadeType.PERSIST,
 			orphanRemoval = true)
 	@JsonIgnore
     private List<Image> images;
 
-	@OneToMany(mappedBy="project")
+	@OneToMany(mappedBy="project",
+			fetch = FetchType.LAZY,
+			cascade= CascadeType.PERSIST,
+			orphanRemoval = true)
 	@JsonIgnore
 	private List<UserProjectAssociation> users;
 	

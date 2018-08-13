@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wbdvprojectjavajpa.models.Project;
 import com.example.wbdvprojectjavajpa.models.User;
+import com.example.wbdvprojectjavajpa.models.UserProjectAssociation;
 import com.example.wbdvprojectjavajpa.repository.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", maxAge=3600, allowCredentials = "true")
 class UserServices {
 	
 	@Autowired
@@ -46,17 +48,38 @@ class UserServices {
 	}
 	
 	//update user
-	@PutMapping ("api/user/{userId}")
-	public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser) {
+	@PostMapping ("api/user/{userId}")
+	public User updateUser(@PathVariable("userId") int userId, @RequestBody Project project) {
 		Optional<User> data = userRespository.findById(userId);
 		if(data.isPresent()) {
 			User user = data.get();
-			user.setUsername(newUser.getUsername());
-			user.setFirstName(newUser.getFirstName());
-			user.setLastName(newUser.getLastName());
-			user.setRole(newUser.getRole());
-			userRespository.save(user);
-			return user;
+//			user.setUsername(newUser.getUsername());
+//			user.setFirstName(newUser.getFirstName());
+//			user.setLastName(newUser.getLastName());
+//			user.setRole(newUser.getRole());
+			
+//			List<UserProjectAssociation> userProjList = user.getProjects();
+			
+//			UserProjectAssociation userProjassoc = new UserProjectAssociation(user, project, "reader");
+//			userProjList.add(userProjassoc);
+//			user.setProjects(userProjList);
+			
+			
+//			for(UserProjectAssociation newUserProj: user.getProjects()) {
+//				UserProjectAssociation tempObj = new UserProjectAssociation();
+////				newUserProj.setUser(newUser);
+////				newUserProj.getProject().setUser(newUser);
+////				tempObj.setProject(newUserProj.getProject());
+////				tempObj.setRole(newUserProj.getRole());
+////				tempObj.setUser(newUser);
+////				userProjList.add(newUserProj);
+//				System.out.println(newUserProj);
+//				System.out.println(newUserProj.getProject().getProjName());
+//			}
+			
+			
+			return userRespository.save(user);
+//			return user;
 			
 		}
 		return null;
@@ -118,9 +141,9 @@ class UserServices {
 	
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
-		System.out.println(session.getAttribute("currentUser"));
+//		System.out.println(session.getAttribute("currentUser"));
 		User currentUser = (User) session.getAttribute("currentUser");
-		System.out.println(currentUser);
+//		System.out.println(currentUser);
 		return currentUser;
 	}
 

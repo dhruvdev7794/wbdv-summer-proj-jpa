@@ -28,7 +28,7 @@ import com.example.wbdvprojectjavajpa.repository.ImageRepository;
 import com.example.wbdvprojectjavajpa.repository.ProjectRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", maxAge=3600, allowCredentials = "true")
 public class ImageService {
 	@Autowired
 	ImageRepository imageRepo;
@@ -37,7 +37,7 @@ public class ImageService {
 	ProjectRepository projectRepo;
 	
 	@GetMapping("api/projects/{projectId}/images")
-	public Iterable<Image> findAllProjects(@PathVariable("projectId") int projectId){
+	public Iterable<Image> findAllImages(@PathVariable("projectId") int projectId){
 		Optional<Project> data = projectRepo.findById(projectId);
 		if(data.isPresent()) {
 			Project project = data.get();
