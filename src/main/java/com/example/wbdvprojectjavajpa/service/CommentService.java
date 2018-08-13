@@ -16,7 +16,7 @@ import com.example.wbdvprojectjavajpa.repository.CommentRepository;
 import com.example.wbdvprojectjavajpa.repository.ImageRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins="*",maxAge=3600, allowCredentials = "true")
 public class CommentService {
 	@Autowired
 	CommentRepository commentRepo;

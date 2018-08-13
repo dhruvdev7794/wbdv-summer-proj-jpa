@@ -28,7 +28,7 @@ import com.example.wbdvprojectjavajpa.repository.ImageRepository;
 import com.example.wbdvprojectjavajpa.repository.ProjectRepository;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins="*",maxAge=3600, allowCredentials = "true")
 public class ImageService {
 	@Autowired
 	ImageRepository imageRepo;
