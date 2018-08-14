@@ -60,6 +60,7 @@ public class ProjectService {
 		if(data.isPresent()) {
 			Project project = data.get();
 			User user = (User) session.getAttribute("currentUser");
+			System.out.println(user.getId());
 			UserProjectAssociation userProj = new UserProjectAssociation(user, project, "reader");
 			List<UserProjectAssociation> userProjList = user.getProjects();
 			userProjList.add(userProj);

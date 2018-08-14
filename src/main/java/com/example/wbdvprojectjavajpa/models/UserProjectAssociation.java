@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,18 +23,21 @@ public class UserProjectAssociation implements Serializable{
 	
 //	@EmbeddedId
 //	private UserProjectId id;
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	private int id;
 	
 	private String role;
 	
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_id", insertable=false, updatable = false)
 	@JsonIgnore
 	private User user;
 	
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="project_id")
+	@JoinColumn(name="project_id", insertable=false, updatable = false)
 	private Project project;
 	
 	public UserProjectAssociation() {}
@@ -67,6 +72,14 @@ public class UserProjectAssociation implements Serializable{
 		this.project = project;
 	}
 
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
+
 //	public UserProjectId getId() {
 //		return id;
 //	}
@@ -74,5 +87,6 @@ public class UserProjectAssociation implements Serializable{
 //	public void setId(UserProjectId id) {
 //		this.id = id;
 //	}
+	
 	
 }

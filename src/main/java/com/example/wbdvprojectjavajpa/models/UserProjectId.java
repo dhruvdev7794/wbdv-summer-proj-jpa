@@ -9,16 +9,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class UserProjectId implements Serializable{
 	@Column(name = "user_id")
-	private Long userId;
+	private Long user_id;
 	
 	@Column(name = "project_id")
-	private Long projectId;
+	private Long project_id;
 	
 	private UserProjectId() {}
 	
 	public UserProjectId(Long userId, Long projectId) {
-		this.projectId = projectId;
-		this.userId = userId;
+		this.project_id = projectId;
+		this.user_id = userId;
 	}
 	
 	@Override
@@ -29,12 +29,12 @@ public class UserProjectId implements Serializable{
 			return false;
 		
 		UserProjectId that = (UserProjectId) obj;
-		return Objects.equals(projectId, that.projectId) &&
-				Objects.equals(userId, that.userId);
+		return Objects.equals(project_id, that.project_id) &&
+				Objects.equals(user_id, that.user_id);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(userId, projectId);
+		return Objects.hash(user_id, project_id);
 	}
 }

@@ -8,6 +8,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import javax.servlet.ServletOutputStream;
@@ -82,7 +85,8 @@ public class ImageService {
 		if(data.isPresent()) {
 			Image image = data.get();
 			try {
-				File file = File.createTempFile(image.getName(), ".png", new File("./src/image"));
+				File file;// = File.createTempFile(image.getName(), ".png", new File("./src/image"));
+				file = new File(System.getProperty("user.dir")+"/src/image/"+image.getName());
 				FileOutputStream out = new FileOutputStream(file); 
 				out.write(contents);
 				out.close();
@@ -91,7 +95,7 @@ public class ImageService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			image.setContents(contents);
+//			image.setContents(contents);
 			return imageRepo.save(image);
 		}
 		return null;
@@ -103,11 +107,15 @@ public class ImageService {
 		if(data.isPresent()) {
 			Image image = data.get();
 //			return System.getProperty("user.dir")+"/src/image/"+image.getName();
-			byte[] contents =  image.getContents();
+			System.out.print(System.getProperty("user.dir")+"/src/image/"+image.getName());
+			Path fileLoc = Paths.get(System.getProperty("user.dir")+"/src/image/"+image.getName());
+			
+//			byte[] contents =  image.getContents();
 			response.setContentType(image.getMimeType());
 			try {
+				byte[] someData = Files.readAllBytes(fileLoc);
 				ServletOutputStream outputStream = response.getOutputStream();
-				outputStream.write(contents);
+				outputStream.write(someData);
 				outputStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

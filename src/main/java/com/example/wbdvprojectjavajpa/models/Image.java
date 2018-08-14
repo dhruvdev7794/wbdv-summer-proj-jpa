@@ -23,9 +23,9 @@ public class Image {
 	private Project project;
 	private String mimeType;
 	private String name;
-	@Lob
-	@Column(name="contents", length = 100000)
-	private byte[] contents;
+//	@Lob
+//	@Column(name="contents", length = 100000)
+//	private byte[] contents;
 	
 	@OneToMany(mappedBy="image", orphanRemoval = true)
 	private List<Comment> comments;
@@ -54,12 +54,12 @@ public class Image {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public byte[] getContents() {
-		return contents;
-	}
-	public void setContents(byte[] contents) {
-		this.contents = contents;
-	}
+//	public byte[] getContents() {
+//		return contents;
+//	}
+//	public void setContents(byte[] contents) {
+//		this.contents = contents;
+//	}
 	public List<Comment> getComments() {
 		return comments;
 	}
