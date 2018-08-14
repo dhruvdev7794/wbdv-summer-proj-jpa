@@ -141,10 +141,12 @@ class UserServices {
 	
 	@GetMapping("/api/profile")
 	public User profile(HttpSession session) {
-//		System.out.println(session.getAttribute("currentUser"));
 		User currentUser = (User) session.getAttribute("currentUser");
-//		System.out.println(currentUser);
-		return currentUser;
+		Optional<User> data = userRespository.findById(currentUser.getId());
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
 	}
 
 	

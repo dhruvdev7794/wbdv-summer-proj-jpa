@@ -1,7 +1,5 @@
 package com.example.wbdvprojectjavajpa.service;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -101,6 +100,15 @@ public class ImageService {
 		return null;
 	}
 	
+	@GetMapping("api/imagedetails/{imageId}")
+	public Image getImageDetails(@PathVariable("imageId") int imageId) {
+		Optional<Image> data = imageRepo.findById(imageId);
+		if(data.isPresent()) {
+			return data.get();
+		}
+		return null;
+	}
+	
 	@GetMapping("api/image/{imageId}")
 	public byte[] getImage(@PathVariable("imageId") int imageId, HttpServletResponse response) {
 		Optional<Image> data = imageRepo.findById(imageId);
@@ -124,5 +132,11 @@ public class ImageService {
 			
 		}
 		return null;
+	}
+	
+	//delete user
+	@DeleteMapping("api/image/{imageId}")
+	public void deleteUser( @PathVariable("imageId") int imageId) {
+		imageRepo.deleteById(imageId);	
 	}
 }

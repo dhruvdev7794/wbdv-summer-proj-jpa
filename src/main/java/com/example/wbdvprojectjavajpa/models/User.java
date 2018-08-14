@@ -27,6 +27,11 @@ public class User {
 	private String role;
 	
 	@OneToMany(mappedBy="user",
+			orphanRemoval = true)
+	@JsonIgnore
+    private List<UserFollowers> followers;
+	
+	@OneToMany(mappedBy="user",
 			fetch = FetchType.LAZY,
 			cascade= CascadeType.PERSIST,
 			orphanRemoval = true)
@@ -73,6 +78,12 @@ public class User {
 	}
 	public void setProjects(List<UserProjectAssociation> projects) {
 		this.projects = projects;
+	}
+	public List<UserFollowers> getFollowers() {
+		return followers;
+	}
+	public void setFollowers(List<UserFollowers> followers) {
+		this.followers = followers;
 	}
 	
 

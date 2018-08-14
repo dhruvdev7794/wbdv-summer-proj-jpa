@@ -14,12 +14,14 @@ public class Comment {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id; // field #1
 	
-	private String comment; // field #2
+	private String userName; // field #2
+	
+	private String comment; // field #3
 	
 	enum Review {
 		excellent, good, average, bad
 	}
-	private Review review; // field #3
+	private Review review; // field #4
 	
 	@ManyToOne
 	@JsonIgnore
@@ -43,5 +45,18 @@ public class Comment {
 	public void setImage(Image image) {
 		this.image = image;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 	
 }
